@@ -28,16 +28,14 @@ export default class TodoItem extends Component {
                 : 'none'
         }
     }    
-
     
-
 
     render() {
         //destructuring
-        const {id, title} = this.props.todoitem;
+        const {id, title, completed} = this.props.todoitem;
         return (
             <div style={this.getStyle()}>
-                <p> <input type="checkbox" onChange={this.props.toggle.bind(this,id)}/> {' '}
+                <p> <input checked={completed} type="checkbox" onChange={this.props.toggle.bind(this,id)}/> {' '}
                     <span style={this.getTitleStyle()}> {title} </span>
                     <button style={btnStyle} onClick={this.props.deleteTodo.bind(this,id)}>X</button>
                 </p>
@@ -46,6 +44,7 @@ export default class TodoItem extends Component {
         )
     }
 }
+
 
 const btnStyle = {
     background: '#ff0000',
@@ -60,5 +59,8 @@ const btnStyle = {
 
 //PropTypes
 TodoItem.propTypes = {
-    todoitem: PropTypes.object.isRequired
+    todoitem: PropTypes.object.isRequired,
+    toggle: PropTypes.func.isRequired,
+    deleteTodo: PropTypes.func.isRequired
+
 }
